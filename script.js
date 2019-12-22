@@ -1,79 +1,91 @@
-function generateQuiz(questions, quizContainer, relultsContainer, submit);
-function showQuestions(questions, quizContainer){
-    var myQuestions = [
-        {
-            question: "What does love mean in tenns?",
-            answers: {
-                a: 'you won',
-                b: 'you lost',
-                c: '0'
-            },
-            correctAnswer: 'c'
-        },
-        {
-            question: "During a tennis match, if the ball lands on the line, what does it mean?",
-            answers: {
-                a: 'its out',
-                b: 'its in',
-                c: 'game over'
-            },
-            correctAnswer: 'b'
-        },
-        {
-            question: "What does duece mean in the game of tennis?",
-            answers: {
-                a: 'its a tie',
-                b: '2 points',
-                c: 'wild card'
-            },
-            correctAnswer: "a"
-        }
-    ];
-}
-    function showQuestions(questions, quizContainer){
-        var output = [];
-        var answer;
-        for(var i=0; i<questions.length; i++){
-            answer = [];
-            for(letter in questions[i].answers){
-                answers.push(
-                    '<label>'
-                    + '<input type = "radio" name = "question '+i+'" value = "'+letter+'">'
-                    + letter + ':'
-                    + questions[i].answers[letter]
-                    +'<label>'
-                );
+$(document).ready(function() {
+  // Grab our elements from our DOM
+  var timerEl = document.getElementById("timer");
+  var startButtonEl = document.getElementById("start-quiz");
+  var quizTitle = document.getElementById('introTitle');
+  var quizIntro = document.getElementById('intro')
 
-            }
-            
-            output.push(
-                '<div class="questions">' + questions[i].question + '</div'
-                + '<div class="answers">' + answers.join('') + '</div>'
-            );
-        }
-        quizContainer.innerHTML = output.join('');
-        
-        showQuestions(questions, quizContainer);
+  // Global variables
+  var time = questions.length * 15;
+  var timerId;
+  var questionIndex = 0;
+
+  // Functions
+  function clockTick() {
+    --time;
+    timerEl.innerHTML = time;
+    if (time === 0) {
+      gameOver();
     }
-function showResults(questions, quizContainer, relultsContainer){
-    var answerContainers = quizContainer.querySelectorAll('.answers');
-    var userAnswer = '';
-    for(var i=0; i<questions.length; i++){
-        userAnswer = (answerContainers[i].querySelector('input[name = question'+i+']:checked')||{}).value;
-        if(userAnswer===questions[i].correctAnswer){
-            numCorrect++;
-            answerContainers[i].style.color = 'lightgreen';
-        }
-        else{
-            answerContainers[i].style.color = 'red';
-        }
-    }
-resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
-}
-submitButton.onclick = function (){
-    showResults(questions, quizContainer, resultsContainer);
-}
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
-generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton)
+  }
+
+  function startTime() {
+    timerId = setInterval(clockTick, 1000);
+  }
+
+  function stopTime() {
+    clearInterval(timerId);
+  }
+
+  function startGame() {
+    startTime();
+    quizTitle.style.display === 'none';
+    quizIntro.style.display === 'none';
+  }
+
+  function generateQuestion() {
+    // Create a new title from question array
+    // Iterate through question choices
+    // Create a button for each choice
+    // Add text to each button
+    // Add class attribute equal to value
+    // Add click function to each button
+    // Append button to question choices div
+
+  };
+
+  function clickButton() {
+    // This function runs everytime we click a button(the questions)
+  }
+
+  function storeHighScores() {
+     
+  }
+
+  function gameOver() {
+    console.log("Game Over");
+  }
+
+  // Onclick Functions
+  startButtonEl.onclick = startGame;
+
+  // $(document).ready(function() {
+  //   document.getElementById("start-quiz").addEventListener("click", myFunction);
+  //   function myFunction() {
+  //     document.getElementById("start-quiz").innerHTML = "Start Quiz Now!";
+  //   }
+  // });
+  // var quizTimer = 75;
+  // var timer = setInterval(function() {
+  //   quizTimer--;
+  //   if (quizTimer === 0) {
+  //     stopInterval();
+  //   }
+  // }, 1000);
+  // var stopInterval = function() {
+  //   clearInterval(timer);
+  // };
+  // function addTime() {
+  //   addTime = secondsElapsed - 5;
+  // }
+  // function isCorrectAnswer() {
+  //   if (userAnswer) {
+  //     userAnswer === answer;
+
+  //     addTime();
+  //   } else {
+  //     userAnswer !== answer;
+  //   }
+  //   removeTime();
+  // }
+});
